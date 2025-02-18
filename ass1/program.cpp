@@ -5,7 +5,7 @@ Program::Program(
 		int numArith,
 		int numLoad, 
 		int numBranch,
-		int numStore,
+		int numStore
 		) {
 
 	this -> numArith = numArith;
@@ -32,8 +32,14 @@ Program::Program(
 void Program::printStats () {
 	printf(
 		"Arith\tLoad\tBranch\tStore\tTotal\n"
-		"%i\t%i\t%i\t%i\t%i\t\n", 
+		"%i\t%i\t%i\t%i\t%i\t\n\n", 
 		numArith, numLoad, numBranch, numStore, numTotal
 		);
 }
+
+int Program::getNumArith() {return numArith;}
+int Program::getNumLoad() {return numLoad;}
+int Program::getNumBranch() {return numBranch;}
+int Program::getNumStore() {return numStore;}
+int Program::getNumTotal() {return numTotal;}
 

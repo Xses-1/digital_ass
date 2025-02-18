@@ -7,3 +7,6 @@ CFLAGS=-pedantic-errors --std=c++98 -g -Wfatal-errors -Wall -Wextra -Werror
 default:
 	${CXX} ${CFLAGS} main.cpp computer.cpp program.cpp -o perfanal.out
 
+run: default
+	./perfanal.out
+

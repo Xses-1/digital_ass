@@ -33,9 +33,10 @@ double Computer::calculateGlobalCPI() {
 double Computer::calculateExecutionTime(Program prog) {
 
 	return (
-		+ prog.numArith * cpiArith
-		+ prog.numLoad * cpiLoad
-		+ prog.numBranch * cpiBranch
-		+ prog.numStore * cpiStore
+		+ prog.getNumArith() * cpiArith
+		+ prog.getNumLoad() * cpiLoad
+		+ prog.getNumBranch() * cpiBranch
+		+ prog.getNumStore() * cpiStore
 		) / cockRateGHz * 1e6;
 }
+

@@ -10,6 +10,7 @@ public:
 
 	Computer(double, double, double, double, double);
 	void printStats();
+	void calculateMIPS();
 	double calculateGlobalCPI();
 	double calculateExecutionTime(Program);
 
