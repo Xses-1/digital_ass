@@ -10,10 +10,24 @@ class Instruction {
 	public:
 		virtual ~Instruction();
 		virtual void disassemble();
-		virtual int execute(Registers);
+		virtual int execute(Registers *);
+
 	protected:
 		int p1, p2, p3;
 	
 };
+
+class AddInstruction : public Instruction {
+};
+
+class SubInstruciton : public Instruction {
+};
+
+class OriInstruciton : public Instruciton {
+};
+
+class BreInstruciton : public Instruction {
+};
+
 
 #endif /* _INSTRUCTION_H_ */
