@@ -9,6 +9,7 @@ Computer::Computer(
 		double cpiLoad, 
 		double cpiBranch,
 		double cpiStore) {
+
 	this -> cockRateGHz = cockRateGhz;
 	this -> cpiArith = cpiArith;
 	this -> cpiLoad = cpiLoad;
