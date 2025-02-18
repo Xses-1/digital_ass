@@ -1,10 +1,22 @@
 #include <stdio.h>
+#include <string.h>
 #include <iostream>
 #include "registers.h"
 
 using namespace std;
 
-Registers::Registers () {}
+Registers::Registers () {
+	
+	for (int i=0; i < NUM_REGISTORS; i++) {
+		registors[i] = 0;
+	}
+
+	// For extra resilience
+	// registers is an array, so sizeof returns total size
+	memset(registors, 0, sizeof(registors));
+
+	pc = 0;
+}
 
 
 void Registers::setRegister(int regNum, int value) {
@@ -38,10 +50,6 @@ int Registers::getPC() {
 
 void Registers::print() {
 	std::cout << std::endl << "-----------------------------" << std::endl;
-	
-	for (int i=0; i < NUM_REGISTORS; i++) {
-		registors[i] = 0;
-	}
 
 	for (int i=0; i < NUM_REGISTORS; i++) {
 		printf("Reg %i: %i\n", i, registors[i]);
