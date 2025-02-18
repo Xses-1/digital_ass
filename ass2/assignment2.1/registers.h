@@ -13,7 +13,10 @@ class Registers
 	Registers();
 
 	private:
-		int registors[32];
+		const static int NUM_REGISTORS = 32;
+		int registors[NUM_REGISTORS];
+		int pc;
 };
 
 #endif	/* _REGISTERS_H_ */
+
