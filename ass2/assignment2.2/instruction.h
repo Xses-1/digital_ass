@@ -23,10 +23,10 @@ class AddInstruction : public Instruction {
 class SubInstruciton : public Instruction {
 };
 
-class OriInstruciton : public Instruciton {
+class OriInstruciton : public Instruction {
 };
 
-class BreInstruciton : public Instruction {
+class BrneInstruciton : public Instruction {
 };
 
 
