@@ -5,6 +5,7 @@
 int main () {
 	Computer computer1 = Computer(1, 2, 3, 4, 5);
 	Computer computer2 = Computer(6, 10, 4, 3, 2);
+	Computer computer3 = Computer(6, 10, 4, 3, 2);
 
 	computer1.printStats();
 	computer2.printStats();

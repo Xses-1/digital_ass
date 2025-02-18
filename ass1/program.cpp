@@ -24,6 +24,7 @@ Program::Program(
 		double fracStore
 		) {
 
+	this -> numTotal = numTotal;
 	this -> numArith = numTotal * fracArith;
 	this -> numLoad = numTotal * fracLoad;
 	this -> numBranch = numTotal * fracBranch;

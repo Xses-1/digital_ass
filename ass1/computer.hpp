@@ -1,3 +1,5 @@
+#include "program.hpp"
+
 class Computer {
 public:
 	double cockRateGHz;
@@ -9,6 +11,7 @@ public:
 	Computer(double, double, double, double, double);
 	void printStats();
 	double calculateGlobalCPI();
+	double calculateExecutionTime(Program);
 
 };
 
