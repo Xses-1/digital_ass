@@ -6,28 +6,26 @@ Program::Program(
 		int numLoad, 
 		int numBranch,
 		int numStore,
-		int numTotal
 		) {
 
 	this -> numArith = numArith;
 	this -> numLoad = numLoad;
 	this -> numBranch = numBranch;
 	this -> numStore = numStore;
-	this -> numTotal = numTotal;
+	this -> numTotal = numArith + numLoad + numBranch + numStore;
 }
 
 Program::Program(
 		int numTotal,
 		double fracArith,
 		double fracLoad, 
-		double fracBranch,
 		double fracStore
 		) {
 
 	this -> numTotal = numTotal;
 	this -> numArith = numTotal * fracArith;
 	this -> numLoad = numTotal * fracLoad;
-	this -> numBranch = numTotal * fracBranch;
+	this -> numBranch = numTotal * (1 - fracArith - fracStore - fracLoad);
 	this -> numStore = numTotal * fracStore;
 }
 
