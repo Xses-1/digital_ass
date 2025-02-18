@@ -1,6 +1,7 @@
 #include "computer.hpp"
 #include "program.hpp"
 #include <stdio.h>
+#include <iostream>
 
 int main () {
 	Computer computer1 = Computer(1, 2, 3, 4, 2);
@@ -13,6 +14,13 @@ int main () {
 
 	printf("CPI: %f\n", computer1.calculateGlobalCPI());
 	printf("CPI: %f\n", computer2.calculateGlobalCPI());
+	printf("CPI: %f\n", computer3.calculateGlobalCPI());
+
+	std::cout << "MIPS" << computer1.calculateMIPS() << "☕"
+		  << computer2.calculateMIPS() << "☕"
+		  << computer3.calculateMIPS() 
+		  << std::endl;
+
 
 	Program program1 = Program(2000, 100, 50, 100);
 	Program program2 = Program(2000, 0.1, 0.25, 0.4);
@@ -21,6 +29,7 @@ int main () {
 	program1.printStats();
 	program2.printStats();
 	program3.printStats();
+
 
 	return 0;
 }

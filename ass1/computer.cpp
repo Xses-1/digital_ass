@@ -40,3 +40,8 @@ double Computer::calculateExecutionTime(Program prog) {
 		) / cockRateGHz * 1e6;
 }
 
+
+double Computer::calculateMIPS(void) {
+
+	return cockRateGHz / calculateGlobalCPI();
+}
