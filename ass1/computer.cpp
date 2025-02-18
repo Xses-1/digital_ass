@@ -1,7 +1,5 @@
-//#include <bits/stdc++.h>
-#include <computer.h>
-
-class Computer(double, double, double, double, double);
+#include "computer.hpp"
+#include <iostream>
 
 Computer::Computer(
 		double cockRateGHz,
@@ -10,7 +8,7 @@ Computer::Computer(
 		double cpiBranch,
 		double cpiStore) {
 
-	this -> cockRateGHz = cockRateGhz;
+	this -> cockRateGHz = cockRateGHz;
 	this -> cpiArith = cpiArith;
 	this -> cpiLoad = cpiLoad;
 	this -> cpiBranch = cpiBranch;
@@ -27,8 +25,10 @@ void Computer::printStats () {
 		  << cpiStore << std::endl;
 }
 
+/*
 void Computer::calculateGlobalCPI() {
 
 	long double CPI = 0.0;
 
 	return CPI = 
+*/
