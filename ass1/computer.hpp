@@ -10,5 +10,6 @@ public:
 
 	Computer(double, double, double, double, double);
 	void printStats();
+	double calculateGlobalCPI();l
 
 };
