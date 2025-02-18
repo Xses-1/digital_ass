@@ -15,7 +15,6 @@ Computer::Computer(
 	this -> cpiStore = cpiStore;
 }
 
-
 void Computer::printStats () {
 
 	std::cout << cockRateGHz << "☕" 

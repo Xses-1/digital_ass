@@ -7,6 +7,7 @@ public:
 	int numTotal;
 
 	Program(int, int, int, int, int);
+	Program(int, double, double, double, double);
 	void printStats();
 
 };

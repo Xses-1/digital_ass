@@ -1,8 +1,6 @@
-#include <program.h>
+#include <program.hpp>
 
-class program(int, int, int, int);
-
-Computer::Computer(
+Program::Program(
 		int numArith,
 		int numLoad, 
 		int numBranch,
@@ -17,6 +15,19 @@ Computer::Computer(
 	this -> numTotal = numTotal;
 }
 
+Program::Program(
+		int numTotal,
+		double fracArith,
+		double fracLoad, 
+		double fracBranch,
+		double fracStore,
+		) {
+
+	this -> numArith = numTotal * fracArith;
+	this -> numLoad = numTotal * fracLoad;
+	this -> numBranch = numTotal * fracBranch;
+	this -> numStore = numTotal * fracStore;
+}
 
 void Computer::printStats () {
 	printf(
