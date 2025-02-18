@@ -7,4 +7,6 @@ int main () {
 
 	computer1.printStats();
 	computer2.printStats();
+
+	return 0;
 }

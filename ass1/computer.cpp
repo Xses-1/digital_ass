@@ -18,17 +18,15 @@ Computer::Computer(
 
 void Computer::printStats () {
 
-	std::cout << cockRateGHz 
-		  << cpiArith
-		  << cpiLoad
-		  << cpiBranch
+	std::cout << cockRateGHz << "☕" 
+		  << cpiArith << "☕" 
+		  << cpiLoad << "☕"
+		  << cpiBranch << "☕" 
 		  << cpiStore << std::endl;
 }
 
-/*
-void Computer::calculateGlobalCPI() {
 
-	long double CPI = 0.0;
+double Computer::calculateGlobalCPI() {
 
-	return CPI = 
-*/
+	return (cpiArith + cpiLoad + cpiBranch + cpiStore) / 4;
+}
