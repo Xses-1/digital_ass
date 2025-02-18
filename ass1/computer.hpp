@@ -9,8 +9,6 @@ public:
 	double cpiStore;
 
 	Computer(double, double, double, double, double);
-	void 
+	void printStats();
 
 };
-
-
