@@ -30,18 +30,28 @@ double Computer::calculateGlobalCPI() {
 	return (cpiArith + cpiLoad + cpiBranch + cpiStore) / 4;
 }
 
-double Computer::calculateExecutionTime(Program prog) {
+double Computer::calculateWeightedCPI(Program prog) {
 
 	return (
 		+ prog.getNumArith() * cpiArith
 		+ prog.getNumLoad() * cpiLoad
 		+ prog.getNumBranch() * cpiBranch
 		+ prog.getNumStore() * cpiStore
-		) / cockRateGHz * 1e6;
+		);
+}
+double Computer::calculateExecutionTime(Program prog) {
+
+	return calculateWeightedCPI(prog) / cockRateGHz * 1e6;
 }
 
 
 double Computer::calculateMIPS(void) {
 
-	return cockRateGHz / calculateGlobalCPI();
+	return cockRateGHz / calculateGlobalCPI(prog);
 }
+
+double Computer::calculateMIPS(Program prog) {
+
+	return cockRateGHz / calculateWeightedCPI();
+}
+

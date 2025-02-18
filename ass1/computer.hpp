@@ -11,7 +11,9 @@ public:
 	Computer(double, double, double, double, double);
 	void printStats();
 	double calculateMIPS();
+	double calculateMIPS(Program);
 	double calculateGlobalCPI();
+	double calculateWeightedCPI(Program);
 	double calculateExecutionTime(Program);
 
 };
