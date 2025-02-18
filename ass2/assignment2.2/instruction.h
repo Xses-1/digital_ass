@@ -18,6 +18,9 @@ class Instruction {
 };
 
 class AddInstruction : public Instruction {
+	public:
+		virtual void disassemble();
+		virtual int execute(Registers *);
 };
 
 class SubInstruciton : public Instruction {

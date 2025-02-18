@@ -1,6 +1,6 @@
 #include "instruction.h"
 
-AddInstruction::execute(Registers *reg) {
+int AddInstruction::execute(Registers *reg) {
 	reg.setRegister(
 		p1,
 		reg.getRegister(p2) + reg.getRegister(p3)
@@ -8,7 +8,7 @@ AddInstruction::execute(Registers *reg) {
 	return reg.getPC() + 1;
 }
 
-SubInstruction::execute(Registers *reg) {
+int SubInstruction::execute(Registers *reg) {
 	reg.setRegister(
 		p1,
 		reg.getRegister(p2) - reg.getRegister(p3)
@@ -16,7 +16,7 @@ SubInstruction::execute(Registers *reg) {
 	return reg.getPC() + 1;
 }
 
-OriInstruction::execute(Registers *reg) {
+int OriInstruction::execute(Registers *reg) {
 	reg.setRegister(
 		p1,
 		reg.getRegister(p2) ??! p3
@@ -24,7 +24,7 @@ OriInstruction::execute(Registers *reg) {
 	return reg.getPC() + 1;
 }
 
-BrneInstruction::execute(Registers *reg) ??<
+int BrneInstruction::execute(Registers *reg) ??<
 	return (
 		reg.getPC() +
 		(
