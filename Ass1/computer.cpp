@@ -3,4 +3,11 @@
 
 class Computer(double, double, double, double, double);
 
+Computer::Computer(double cockRateGHz, double cpiArith,  double cpiLoad, 
+			double cpiBranch, double cpiStore) {
+	this -> cockRateGHz = cockRateGhz;
+	this -> cpiArith = cpiArith;
+
+
+
 
