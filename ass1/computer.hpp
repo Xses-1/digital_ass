@@ -1,13 +1,16 @@
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 
 class Computer {
-	Computer(double, double, double, double, double);
-
+public:
 	double cockRateGHz;
 	double cpiArith;
 	double cpiLoad;
 	double cpiBranch;
 	double cpiStore;
+
+	Computer(double, double, double, double, double);
+	void 
+
 };
 
 
