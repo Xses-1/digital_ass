@@ -1,0 +1,14 @@
+The program dependent MIPS are much lower than the non dependen ones.
+It is caused by the programs utilizing the instrucitons nonevenely and thus
+hitting the slower instructions more often.
+
+
+
+
+
+The findings confirm that it's not a perfect measure since it is heavily
+dependant on the utilization of the instrucions in a given program and in
+some cases it can be much smaller than in the others as seen between the findings.
+
+It also makes some architectures more favaorable even though the progrma execution
+times might be actually the same on them, as seen in the findings.
