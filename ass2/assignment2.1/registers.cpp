@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <iostream>
 #include "registers.h"
 
 using namespace std;
@@ -6,13 +7,13 @@ using namespace std;
 Registers::Registers () {}
 
 
-void Register::setRegister(int regNum, int value) {
+void Registers::setRegister(int regNum, int value) {
 
 	registors[regNum] = value;
 }
 
 
-void Register::getRegister(int regNum) {
+int Registers::getRegister(int regNum) {
 	
 tryagain:
 	if (regNum == 0) {
@@ -27,17 +28,28 @@ tryagain:
 	}
 }
 
-void Register::setPc(int value) {
+void Registers::setPC(int value) {
 	pc = value;
 }
 
-int Register::getPc() {
+int Registers::getPC() {
 	return pc;
 }
 
-void print() {
+void Registers::print() {
+	std::cout << std::endl << "-----------------------------" << std::endl;
+	
+	for (int i=0; i < NUM_REGISTORS; i++) {
+		registors[i] = 0;
+	}
+
 	for (int i=0; i < NUM_REGISTORS; i++) {
 		printf("Reg %i: %i\n", i, registors[i]);
 	}
+
+	std::cout << "This is the progrma counter: " << pc << std::endl;
+
+	std::cout << std::endl << std::endl << 
+		"--------------------------------" << std::endl;
 }
 
