@@ -5,5 +5,5 @@ CFLAGS=-pedantic-errors --std=c++98 -g -Wfatal-errors -Wall -Wextra -Werror
 #ONAME=snw
 
 default:
-	${CXX} ${CFLAGS} main.cpp computer.cpp -o perfanal.out
+	${CXX} ${CFLAGS} main.cpp computer.cpp program.cpp -o perfanal.out
 

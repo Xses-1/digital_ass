@@ -15,8 +15,8 @@ int main () {
 	Program program1 = Program(1000, 1200, 200, 3000, 1000);
 	Program program2 = Program(5000, 0.3, 0.4, 0.2, 0.1);
 
-	computer1.printStats();
-	computer2.printStats();
+	program1.printStats();
+	program2.printStats();
 
 	return 0;
 }

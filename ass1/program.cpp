@@ -1,11 +1,12 @@
-#include <program.hpp>
+#include "program.hpp"
+#include <stdio.h>
 
 Program::Program(
 		int numArith,
 		int numLoad, 
 		int numBranch,
 		int numStore,
-		int numTotal,
+		int numTotal
 		) {
 
 	this -> numArith = numArith;
@@ -20,7 +21,7 @@ Program::Program(
 		double fracArith,
 		double fracLoad, 
 		double fracBranch,
-		double fracStore,
+		double fracStore
 		) {
 
 	this -> numArith = numTotal * fracArith;
@@ -29,11 +30,11 @@ Program::Program(
 	this -> numStore = numTotal * fracStore;
 }
 
-void Computer::printStats () {
+void Program::printStats () {
 	printf(
 		"Arith\tLoad\tBranch\tStore\tTotal\n"
-		"%i\t%i\t%i\t%i\t%i"
-		numArtirh, numLoad, numLoad, numBranch, numStore, numTotal
+		"%i\t%i\t%i\t%i\t%i\t\n", 
+		numArith, numLoad, numBranch, numStore, numTotal
 		);
 }
 
