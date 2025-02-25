@@ -8,6 +8,7 @@ using namespace std;
 
 class Instruction {
 	public:
+		Instruction(int, int, int);
 		virtual ~Instruction();
 		virtual void disassemble();
 		virtual int execute(Registers *);

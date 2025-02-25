@@ -4,10 +4,11 @@
 
 int main (void)
 {
-        appendInstruction (new OriInstruction (3, 0, 1));
-        appendInstruction (new AddInstruction (4, 4, 1));
-        appendInstruction (new SubInstruction (2, 2, 3));
-        appendInstruction (new BrneInstruction (2, 0, -3));
+	Registers regs = Registers();
+	regs.setRegistes(1, 5);
+	regs.setRegistes(2, 5);
+	regs.setRegistes(3, 3);
 
-        return 0;
+	Instruction brne = BrneInstruction();
+	return 0;
 }
