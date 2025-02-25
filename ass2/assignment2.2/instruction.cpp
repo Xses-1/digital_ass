@@ -28,10 +28,10 @@ int BrneInstruction::execute(Registers *reg) ??<
 	return (
 		reg->getPC() +
 		(
-			(reg->getRegister(p1) != reg->getRegister(p2)) : 
-			: p3
-			? 1
+			(reg->getRegister(p1) != reg->getRegister(p2)) ?
+			p3
+			: 1
 			)
-		)
+		);
 ??>
 

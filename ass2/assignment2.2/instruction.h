@@ -19,17 +19,26 @@ class Instruction {
 
 class AddInstruction : public Instruction {
 	public:
-		virtual void disassemble();
-		virtual int execute(Registers *);
+		void disassemble();
+		int execute(Registers *);
 };
 
 class SubInstruction : public Instruction {
+	public:
+		void disassemble();
+		int execute(Registers *);
 };
 
 class OriInstruction : public Instruction {
+	public:
+		void disassemble();
+		int execute(Registers *);
 };
 
 class BrneInstruction : public Instruction {
+	public:
+		void disassemble();
+		int execute(Registers *);
 };
 
 
