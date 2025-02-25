@@ -23,13 +23,13 @@ class AddInstruction : public Instruction {
 		virtual int execute(Registers *);
 };
 
-class SubInstruciton : public Instruction {
+class SubInstruction : public Instruction {
 };
 
-class OriInstruciton : public Instruction {
+class OriInstruction : public Instruction {
 };
 
-class BrneInstruciton : public Instruction {
+class BrneInstruction : public Instruction {
 };
 
 
