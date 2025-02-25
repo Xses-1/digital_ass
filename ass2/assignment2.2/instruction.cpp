@@ -7,6 +7,10 @@ Instruction::Instruction(int p1, int p2, int p3) {
 	this->p3 = p3;
 }
 
+//BrneInstruction::BrneInstruction(int p1, int p2, int p3) {
+//}
+
+
 int AddInstruction::execute(Registers *reg) {
 	reg->setRegister(
 		p1,

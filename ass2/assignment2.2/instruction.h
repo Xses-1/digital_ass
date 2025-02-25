@@ -4,12 +4,10 @@
 #include <iostream>
 #include "registers.h"
 
-using namespace std;
-
 class Instruction {
 	public:
 		Instruction(int, int, int);
-		virtual ~Instruction();
+		//virtual ~Instruction();
 		virtual void disassemble();
 		virtual int execute(Registers *);
 
@@ -20,24 +18,28 @@ class Instruction {
 
 class AddInstruction : public Instruction {
 	public:
+		AddInstruction(int, int, int);
 		void disassemble();
 		int execute(Registers *);
 };
 
 class SubInstruction : public Instruction {
 	public:
+		SubInstruction(int, int, int);
 		void disassemble();
 		int execute(Registers *);
 };
 
 class OriInstruction : public Instruction {
 	public:
+		OriInstruction(int, int, int);
 		void disassemble();
 		int execute(Registers *);
 };
 
 class BrneInstruction : public Instruction {
 	public:
+		//BrneInstruction(int, int, int);
 		void disassemble();
 		int execute(Registers *);
 };
