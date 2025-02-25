@@ -1,8 +1,13 @@
 #include <iostream>
 #include "registers.h"
-using namespace std;
+#include "instruction.h"
 
-int main()
+int main (void)
 {
-   
+        appendInstruction (new OriInstruction (3, 0, 1));
+        appendInstruction (new AddInstruction (4, 4, 1));
+        appendInstruction (new SubInstruction (2, 2, 3));
+        appendInstruction (new BrneInstruction (2, 0, -3));
+
+        return 0;
 }
