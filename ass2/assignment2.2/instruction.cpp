@@ -41,3 +41,6 @@ int BrneInstruction::execute(Registers *reg) ??<
 		);
 ??>
 
+void AddInstruction::disassemble () {
+
+}
