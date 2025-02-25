@@ -18,21 +18,24 @@ class Instruction {
 
 class AddInstruction : public Instruction {
 	public:
-		AddInstruction(int, int, int);
+        AddInstruction(int p1, int p2, int p3):
+				Instruction(p1, p2, p3) {};
 		void disassemble();
 		int execute(Registers *);
 };
 
 class SubInstruction : public Instruction {
 	public:
-		SubInstruction(int, int, int);
+        SubInstruction(int p1, int p2, int p3):
+				Instruction(p1, p2, p3) {};
 		void disassemble();
 		int execute(Registers *);
 };
 
 class OriInstruction : public Instruction {
 	public:
-		OriInstruction(int, int, int);
+        OriInstruction(int p1, int p2, int p3):
+				Instruction(p1, p2, p3) {};
 		void disassemble();
 		int execute(Registers *);
 };

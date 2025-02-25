@@ -1,5 +1,5 @@
 CXX=g++
-CFLAGS=-pedantic-errors --std=c++98 -g -Wfatal-errors -Wall -Wextra -Werror
+CFLAGS=-pedantic-errors --std=c++11 -g -Wfatal-errors -Wall -Wextra -Werror
 #SPATH=./src
 #OPATH=./bin
 #ONAME=snw
