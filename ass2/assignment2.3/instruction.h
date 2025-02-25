@@ -4,10 +4,49 @@
 #include <iostream>
 #include "registers.h"
 
-using namespace std;
+class Instruction {
+	public:
+		Instruction(int, int, int);
+		//virtual ~Instruction();
+		virtual void disassemble();
+		virtual int execute(Registers *);
 
-class Instruction
-{
+	protected:
+		int p1, p2, p3;
+	
 };
+
+class AddInstruction : public Instruction {
+	public:
+        	AddInstruction(int p1, int p2, int p3):
+				Instruction(p1, p2, p3) {};
+		void disassemble();
+		int execute(Registers *);
+};
+
+class SubInstruction : public Instruction {
+	public:
+        	SubInstruction(int p1, int p2, int p3):
+				Instruction(p1, p2, p3) {};
+		void disassemble();
+		int execute(Registers *);
+};
+
+class OriInstruction : public Instruction {
+	public:
+        	OriInstruction(int p1, int p2, int p3):
+				Instruction(p1, p2, p3) {};
+		void disassemble();
+		int execute(Registers *);
+};
+
+class BrneInstruction : public Instruction {
+	public:
+        	BrneInstruction(int p1, int p2, int p3):
+				Instruction(p1, p2, p3) {};
+		virtual void disassemble();
+		int execute(Registers *);
+};
+
 
 #endif /* _INSTRUCTION_H_ */
