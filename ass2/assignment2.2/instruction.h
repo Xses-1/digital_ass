@@ -40,7 +40,9 @@ class OriInstruction : public Instruction {
 class BrneInstruction : public Instruction {
 	public:
 		//BrneInstruction(int, int, int);
-		void disassemble();
+        BrneInstruction(int p1, int p2, int p3):
+				Instruction(p1, p2, p3) {};
+		virtual void disassemble();
 		int execute(Registers *);
 };
 

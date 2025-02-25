@@ -46,6 +46,9 @@ int BrneInstruction::execute(Registers *reg) ??<
 		);
 ??>
 
+void Instruction::disassemble () {}
+int Instruction::execute (Registers *r) {}
+
 void AddInstruction::disassemble () {
 	printf("add $%i, $%i, $%i\n", p1, p2, p3);
 }
