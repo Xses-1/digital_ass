@@ -1,4 +1,5 @@
 #include "instruction.h"
+#include <cstdio>
 
 Instruction::Instruction(int p1, int p2, int p3) {
 	this->p1 = p1;

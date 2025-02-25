@@ -5,10 +5,18 @@
 int main (void)
 {
 	Registers regs = Registers();
-	regs.setRegistes(1, 5);
-	regs.setRegistes(2, 5);
-	regs.setRegistes(3, 3);
+	regs.setRegisters(1, 5);
+	regs.setRegisters(2, 5);
+	regs.setRegisters(3, 3);
 
-	Instruction brne = BrneInstruction();
+	Instruction add	= AddInstruction(1, 2, 3);
+	Instruction sub = SubInstruction(1, 2, 3);
+	Instruciton ori = OriInstruction(1, 2, 3);
+	Instruction brne1 = BrneInstruction(1, 2, 42);
+	Instruction brne2 = BrneInstruction(2, 3, 69);
+
+	brne1.dissasemble();
+	brne2.dissasemble();
+
 	return 0;
 }
