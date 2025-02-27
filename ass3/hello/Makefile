@@ -6,7 +6,7 @@ run: compile
 	qemu-mips ./hello.out
 
 scp:
-	dd if=hello.out | ssh wiktom 'mkdir -p /tmp/home/root/grass ; cd /tmp/home/root/grass; dd of=hello.out; chmod +x hello.out; ./hello.out'
+	dd if=hello.out | ssh tomato 'mkdir -p /tmp/home/root/grass ; cd /tmp/home/root/grass; dd of=hello.out; chmod +x hello.out; ./hello.out'
 
 clean:
 	rm *.o *.out
