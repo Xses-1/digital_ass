@@ -1,3 +1,5 @@
 *.vim
 *.out
 student_numbers
+*.o
+*busybox*
