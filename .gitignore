@@ -1,2 +1,5 @@
 *.vim
 *.out
+*.o
+*busybox*
+
