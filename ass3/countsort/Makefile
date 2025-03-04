@@ -1,6 +1,10 @@
 compile:
-	mips-linux-musl-as countsort.s -EL -o countsort.o
-	mips-linux-musl-gcc countsort.o -EL -o countsort.out -static-pie
+	mipsel-linux-musl-as countsort.s -EL -o countsort.o
+	mipsel-linux-musl-gcc countsort.o -EL -o countsort.out -static
+
+compile-gnu:
+	mipsel-linux-gnu-as countsort.s -EL -o countsort.o
+	mipsel-linux-gnu-gcc countsort.o -EL -o countsort.out -static
 
 run: compile
 	qemu-mips ./countsort.out
