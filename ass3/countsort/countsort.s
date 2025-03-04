@@ -182,6 +182,20 @@ count_less_than:
 	# $a2 = index of element we're interested in
 	# $v0 = number of elements less than this element
 
+	sll $a1, $a1, 2
+	sll $a2, $a2, 2
+
+	# according to calling convention,   
+	# The t registers can be used
+	# without saving them, so that's what we'll do
+	# let $t0 be the loop variable
+	# let $t1 be the loop end variable
+	# let $t2 be the current inspected value
+
+
+	addi $t0, $0, 0
+	add $t1, $a1, 
+
 
 
 
