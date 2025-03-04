@@ -188,13 +188,20 @@ count_less_than:
 	# according to calling convention,   
 	# The t registers can be used
 	# without saving them, so that's what we'll do
-	# let $t0 be the loop variable
-	# let $t1 be the loop end variable
-	# let $t2 be the current inspected value
+	# let $t0 be the outter loop variable
+	# let $t1 be the outter loop end variable
+	# let $t2 be the outter current inspected value
 
 
-	addi $t0, $0, 0
-	add $t1, $a1, 
+	# Start llop
+	addi $t0, $a0, 0
+	add $t1, $a0, $a1
+count_less_than_l:
+	beq $t0, $t1, count_less_than_lx
+	lw $t2, 0($t0)
+
+
+count_less_than_lx:
 
 
 
