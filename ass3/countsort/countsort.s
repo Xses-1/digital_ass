@@ -49,18 +49,18 @@ main:
 	jal puts
 	jal scan_int
 
-	## Quadruple the number to
-	## get the size in bytes
-	#add $v0, $v0, $v0
-	#add $v0, $v0, $v0
-	## Save size in bytes
-	## to persistent register $s3
-	#addi $s3, $v0, 0
+	# Quadruple the number to
+	# get the size in bytes
+	add $v0, $v0, $v0
+	add $v0, $v0, $v0
+	# Save size in bytes
+	# to persistent register $s3
+	addi $s3, $v0, 0
 
-	## Allocate space for array
-	#addi $a0, $s3, 0
-	#jal malloc
-	#bne $v0, $zero, malloc_ok
+	# Allocate space for array
+	addi $a0, $s3, 0
+	jal malloc
+	bne $v0, $zero, malloc_ok
 
 	addi $a0, $v0, 0
 	jal print_int
