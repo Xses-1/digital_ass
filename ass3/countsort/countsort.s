@@ -201,16 +201,25 @@ count_less_than:
 	# Start llop
 	addi $t0, $a0, 0
 	add $t1, $a0, $a1
-count_less_than_l:
-	beq $t0, $t1, count_less_than_lx
+count_less_than__l:
+	beq $t0, $t1, count_less_than__lx
 	lw $t2, 0($t0)
 
 	
-	ble $t2, $t3, add_the_counter_thing
+	# t4: is a[j] < a[i]
+	slt $t4, $t2, $t3
+	# t5: a[j] - a[i]
+	sub $t5, $t2, $t3
 
 
 
-count_less_than_lx:
+	slt $t4, $t2, $t3
+	ble $t2, $t3, count_less_than__ble
+	beq $t2, $t3, add_the_counter__eq
+
+
+
+count_less_than__lx:
 
 
 
