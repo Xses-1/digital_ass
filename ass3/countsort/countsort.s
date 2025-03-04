@@ -185,6 +185,9 @@ count_less_than:
 	sll $a1, $a1, 2
 	sll $a2, $a2, 2
 
+	# Convert $a2 to address by adding it to base addr of array
+	add $a2, $a2, $a0
+
 	# according to calling convention,   
 	# The t registers can be used
 	# without saving them, so that's what we'll do
@@ -193,9 +196,7 @@ count_less_than:
 	# let $t2 be the outter current inspected value
 
 	# let $t3 be the element of interestingness
-	# let $t4 be the register of the value of interegnissgnes
 
-	add #
 	lw $t3, 0($a2)
 
 	# Start llop
