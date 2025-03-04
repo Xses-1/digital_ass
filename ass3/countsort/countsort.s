@@ -182,6 +182,11 @@ count_less_than:
 	# $a2 = index of element we're interested in - i 
 	# $v0 = number of elements less than this element
 
+	# Reset that bitch 
+	addi $v0, $0, 0
+
+
+
 	sll $a1, $a1, 2
 	sll $a2, $a2, 2
 
@@ -217,20 +222,19 @@ count_less_than__l:
 
 	# t6: t6 is 0 if i < j
 	slt $t6, $a2, $t0
-	xor $t5, $t5, 0b00000000000000000000000000000001
+	xor $t5, $t5, 0x10000000000000000000000000000000
 
 	# t7 = 0 if a[j] == a[i] && i < j
 	or $t7, $t4, $t6
 
+	bne $t7, $0, count_les_than__l
+
 
 count_less_than__incr:
 
+	addi $v0, $v0, 1
 
-
-	slt $t4, $t2, $t3
-	ble $t2, $t3, count_less_than__ble
-	beq $t2, $t3, add_the_counter__eq
-
+	j count_less_than__l
 
 
 count_less_than__lx:
