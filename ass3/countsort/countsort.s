@@ -87,25 +87,7 @@ l_read:
 	j l_read
 lx_read:	
 
-	# test swap routine
-	#addi $a0, $s4, 0
-	#addi $a1, $zero, 1
-	#addi $a2, $zero, 2
-	#jal swap_vals
-
-	# test index_min routune
-	# addi $a0, $s4, 0
-	# addi $a1, $zero, 0
-	# addi $a2, $zero, 3
-	# jal index_min
-	# addi $a0, $v0, 0
-	# jal print_int
-	# exit 1
-
-	addi $a0, $s4, 0
-	addi $a1, $s3, 0
-	srl $a1, $a1, 2
-	jal selsrt
+	
 
 	# Print array
 	# let s1 be the upper bound of the loop
@@ -192,6 +174,18 @@ selsrt_lx:
 	stackload $ra, 5
 	stfree 6
 	jr $ra
+
+
+count_Less_than:
+	# $a0 = array
+	# $a1 = first index (inclusive)
+	# $a2 = last index (inclusive)
+	# $v0 = index of minimum value
+
+
+
+
+
 
 index_min:
 	# $a0 = array
