@@ -178,8 +178,8 @@ selsrt_lx:
 
 count_less_than:
 	# $a0 = array
-	# $a1 = length of array
-	# $a2 = index of element we're interested in
+	# $a1 = length of array - len
+	# $a2 = index of element we're interested in - i 
 	# $v0 = number of elements less than this element
 
 	sll $a1, $a1, 2
@@ -191,9 +191,9 @@ count_less_than:
 	# according to calling convention,   
 	# The t registers can be used
 	# without saving them, so that's what we'll do
-	# let $t0 be the outter loop variable
-	# let $t1 be the outter loop end variable
-	# let $t2 be the outter current inspected value - a[j]
+	# let $t0 be the loop variable - j 
+	# let $t1 be the loop end variable
+	# let $t2 be the current inspected value - a[j]
 
 	# let $t3 be the element of interestingness - a[i]
 	lw $t3, 0($a2)
@@ -208,8 +208,12 @@ count_less_than__l:
 	
 	# t4: is a[j] < a[i]
 	slt $t4, $t2, $t3
+
 	# t5: a[j] - a[i]
 	sub $t5, $t2, $t3
+
+	# t6: is i < j
+	slt $t6, $a2, $t0
 
 
 
