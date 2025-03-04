@@ -60,24 +60,24 @@ main:
 	# Allocate space for array
 	addi $a0, $s3, 0
 	jal malloc
+	# If malloc return a null pointer, exit program
 	beq $v0, $zero, malloc_fail
 
-	exit 0  # memory allocation error
+	# Print message
+	la $a0, insert_string
+	jal puts
 
 	# Save address of array
 	# to persistent register $s4
 	addi $s4, $v0, 0
+
 	# Read in array elements
 	# let s1 be the upper bound of the loop
 	# and s0 the variable of iteration
+	# Remeber, s3 is size of array in bytes.
 	addi $s0, $s4, 0
 	addi $s1, $s3, 0
 	add $s1, $s1, $s0
-
-malloc_fail:	
-	# Print message
-	la $a0, insert_string
-	exit -1
 
 l_read:	
 	beq $s0, $s1, lx_read
@@ -124,6 +124,11 @@ lx_print:
 
 	exit 0
 
+malloc_fail:	
+	# If malloc failed, print an error message and exit
+	la $a0, malloc_fail_string
+	jal puts
+	exit -1
 
 selsrt:
 	# $a0 = array
@@ -320,6 +325,7 @@ debug_int:
 
 .section .data
 	# CONSTANTS
+	malloc_fail_string: .asciz "Malloc fun fukd, bye!"
 	hello_string: .asciz "Insert the array size"
 	insert_string: .asciz "Insert the array element, one per line"
 	# scanf format code to read an int
