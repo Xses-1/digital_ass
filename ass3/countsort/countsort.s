@@ -208,12 +208,22 @@ count_less_than__l:
 	
 	# t4: is a[j] < a[i]
 	slt $t4, $t2, $t3
+	bne $t4, $0, count_less_than__incr
 
-	# t5: a[j] - a[i]
+	# Demorgan bullshit ahead
+
+	# t5: t5 is 0 if a[j] == a[i]
 	sub $t5, $t2, $t3
 
-	# t6: is i < j
+	# t6: t6 is 0 if i < j
 	slt $t6, $a2, $t0
+	xor $t5, $t5, 0b00000000000000000000000000000001
+
+	# t7 = 0 if a[j] == a[i] && i < j
+	or $t7, $t4, $t6
+
+
+count_less_than__incr:
 
 
 
