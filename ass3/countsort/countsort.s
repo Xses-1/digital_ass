@@ -85,8 +85,19 @@ l_read:
 	sw $v0, 0($s0)
 	addi $s0, $s0, WORD_SIZE
 	j l_read
-lx_read:	
+lx_read:
 
+
+
+	# test count_less_than
+	addi $a0, $s0, 0  # a0 = array
+	addi $a1, $s3, 0  # a0 = array len
+	addi $a2, $0, 1  # a0 = index of element i
+
+	addi $a0, $v0, 0
+	jal puts
+
+	exit 5
 	
 
 	# Print array
@@ -210,6 +221,8 @@ count_less_than__l:
 	beq $t0, $t1, count_less_than__lx
 	lw $t2, 0($t0)
 
+	addi $t0, $t0, WORD_SIZE
+
 	
 	# t4: is a[j] < a[i]
 	slt $t4, $t2, $t3
@@ -222,7 +235,7 @@ count_less_than__l:
 
 	# t6: t6 is 0 if i < j
 	slt $t6, $a2, $t0
-	xor $t5, $t5, 0x10000000000000000000000000000000
+	xor $t5, $t5, 0b10000000000000000000000000000000
 
 	# t7 = 0 if a[j] == a[i] && i < j
 	or $t7, $t4, $t6
@@ -236,9 +249,9 @@ count_less_than__incr:
 
 	j count_less_than__l
 
-
 count_less_than__lx:
 
+	jr $ra
 
 
 
