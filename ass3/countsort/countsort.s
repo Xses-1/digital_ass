@@ -60,30 +60,25 @@ main:
 	# Allocate space for array
 	addi $a0, $s3, 0
 	jal malloc
-	bne $v0, $zero, malloc_ok
+	beq $v0, $zero, malloc_fail
 
-	addi $a0, $v0, 0
-	jal print_int
+	exit 0  # memory allocation error
 
-	exit 69
-
-	#exit -1  # memory allocation error
-
-malloc_ok:	
 	# Save address of array
 	# to persistent register $s4
 	addi $s4, $v0, 0
-
-	# Print message
-	la $a0, insert_string
-	jal puts
-
 	# Read in array elements
 	# let s1 be the upper bound of the loop
 	# and s0 the variable of iteration
 	addi $s0, $s4, 0
 	addi $s1, $s3, 0
 	add $s1, $s1, $s0
+
+malloc_fail:	
+	# Print message
+	la $a0, insert_string
+	exit -1
+
 l_read:	
 	beq $s0, $s1, lx_read
 	jal scan_int
