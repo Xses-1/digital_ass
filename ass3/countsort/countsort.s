@@ -176,11 +176,11 @@ selsrt_lx:
 	jr $ra
 
 
-count_Less_than:
+count_less_than:
 	# $a0 = array
-	# $a1 = first index (inclusive)
-	# $a2 = last index (inclusive)
-	# $v0 = index of minimum value
+	# $a1 = length of array
+	# $a2 = index of element we're interested in
+	# $v0 = number of elements less than this element
 
 
 
