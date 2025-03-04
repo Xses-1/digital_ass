@@ -193,10 +193,9 @@ count_less_than:
 	# without saving them, so that's what we'll do
 	# let $t0 be the outter loop variable
 	# let $t1 be the outter loop end variable
-	# let $t2 be the outter current inspected value
+	# let $t2 be the outter current inspected value - a[j]
 
-	# let $t3 be the element of interestingness
-
+	# let $t3 be the element of interestingness - a[i]
 	lw $t3, 0($a2)
 
 	# Start llop
@@ -206,7 +205,8 @@ count_less_than_l:
 	beq $t0, $t1, count_less_than_lx
 	lw $t2, 0($t0)
 
-
+	
+	ble $t2, $t3, add_the_counter_thing
 
 
 
