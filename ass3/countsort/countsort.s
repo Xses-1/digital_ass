@@ -192,6 +192,11 @@ count_less_than:
 	# let $t1 be the outter loop end variable
 	# let $t2 be the outter current inspected value
 
+	# let $t3 be the element of interestingness
+	# let $t4 be the register of the value of interegnissgnes
+
+	add #
+	lw $t3, 0($a2)
 
 	# Start llop
 	addi $t0, $a0, 0
@@ -199,6 +204,9 @@ count_less_than:
 count_less_than_l:
 	beq $t0, $t1, count_less_than_lx
 	lw $t2, 0($t0)
+
+
+
 
 
 count_less_than_lx:
