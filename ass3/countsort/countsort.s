@@ -98,14 +98,9 @@ lx_read:
 	# jal debug_int
 	# --------------------------------------------------------
 
-
 	move $a0, $s4 # a0 = array
 	move $a1, $s3 # a1 = array len
 	jal sort_by_counting
-
-
-	exit 69
-	
 
 	# Print array
 	# let s1 be the upper bound of the loop
@@ -230,6 +225,8 @@ count_less_than:
 
 
 count_less_than__l:
+
+
 	beq $s1, $s3, count_less_than__lx
 	lw $s5, 0($s3)
 
@@ -262,17 +259,22 @@ count_less_than__l:
 	# t7 = 0 if a[j] == a[i] && i < j
 	or $t3, $t1, $t2
 
+	la $a0, debug_fmt_int
+	jal puts
+
 	bne $t3, $0, count_less_than__l
 
 count_less_than__incr:
 
 	addi $s7, $s7, 1
 
+
 	j count_less_than__l
 
 count_less_than__lx:
 
 	move $v0, $s7
+
 
 	stackload $ra, 0
 	stackload $s0, 1
@@ -321,7 +323,7 @@ sort_by_counting:
 	move $s0, $a0
 	add $s1, $a0, $a1 # end of array = array base + length
 	move $s2, $a0
-
+	
 
 	# Allocate the b array
 	addi $a0, $a1, 0
@@ -335,16 +337,19 @@ sort_by_counting__l1:
 	
 	# if i == lenght, then go out
 	beq $s1, $s2, sort_by_counting__l1x
-	# i++
-	addi $s2, $s2, WORD_SIZE
 
 
 	# lessThan = countLessThan(a, lenght, i);
 	move $a0, $s0 # a0 = array
 	move $a1, $s1 # a1 = array len
 	move $a2, $s2
+
+
+
 	jal count_less_than
+
 	sll $s3, $v0, 2
+
 
 	# b[lessThan] = a[i]
 	add $s3, $s3, $s4
@@ -355,11 +360,31 @@ sort_by_counting__l1:
 	# b[lessThan] = a[i]
 	sw $t0, 0($s3) 
 
-	j sort_by_counting__l1
+	# i++
+	addi $s2, $s2, WORD_SIZE
 
+	j sort_by_counting__l1
 
 sort_by_counting__l1x:
 
+sort_by_counting__l2:
+
+	# fuckit using s0 and s4 directly as incrementers
+
+	beq $s0, $s1, sort_by_counting__l2x
+
+	lw $t0, 0($s4)
+	sw $t0, 0($s0)
+
+	addi $s4, $s4, WORD_SIZE
+	addi $s0, $s0, WORD_SIZE
+
+	j sort_by_counting__l2
+
+
+sort_by_counting__l2x:
+
+	# TODO deallocate
 
 	stackload $ra, 0
 	stackload $s0, 1
