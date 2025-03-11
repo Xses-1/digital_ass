@@ -252,29 +252,31 @@ count_less_than__l:
 	# Getting demorganned:
 	# t0 || !(!t1 || !t2)
 	
-	# t4: is a[j] < a[i]
+	# t0: is a[j] < a[i]
 	slt $t0, $s5, $s4
 	bne $t0, $0, count_less_than__incr
 
-	# t5: t5 is 0 if a[j] == a[i]
-	sub $t5, $t2, $t3
+	# t1: is 0 if a[j] == a[i]
+	sub $t1, $s5, $s4
 
-	# t6: t6 is 0 if i < j
-	slt $t6, $a2, $t0
-	xor $t5, $t5, 0b10000000000000000000000000000000
+	# t2: is 0 if i < j
+	slt $t2, $s2, $s3
+	xor $t2, $t2, 0b10000000000000000000000000000000
 
 	# t7 = 0 if a[j] == a[i] && i < j
-	or $t7, $t4, $t6
+	or $t3, $t1, $t2
 
-	bne $t7, $0, count_less_than__l
+	bne $t3, $0, count_less_than__l
 
 count_less_than__incr:
 
-	addi $v0, $v0, 1
+	addi $s7, $s7, 1
 
 	j count_less_than__l
 
 count_less_than__lx:
+
+	move $v0, $s7
 
 	stackload $ra, 0
 	stackload $s0, 1
@@ -287,8 +289,6 @@ count_less_than__lx:
 	stackload $s7, 8
 	stfree 1
 	jr $ra
-
-
 
 
 
