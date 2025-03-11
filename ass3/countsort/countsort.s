@@ -192,7 +192,7 @@ count_less_than:
 	# $a2 = index of element we're interested in - i 
 	# $v0 = number of elements less than this element
 
-	stalloc 1
+	stalloc 9
 	stackstore $ra, 0
 	stackstore $s0, 1
 	stackstore $s1, 2
@@ -220,22 +220,13 @@ count_less_than:
 	add $s2, $a2, $a0
 
 	move $s3, $a0 # start looking at element 0
+	lw $s4, 0($s2) # address of the element we interested in --pedantic 
 	move $s7, $0 # start counting numbers less than at 0
 
 
-	# according to calling convention,   
-	# The t registers can be used
-	# without saving them, so that's what we'll do
-	# let $t0 be the loop variable - j 
-	# let $t1 be the loop end variable
-	# let $t2 be the current inspected value - a[j]
-
-	# let $t3 be the element of interestingness - a[i]
-	#lw $t3, 0($a2)
-
 count_less_than__l:
 	beq $s1, $s3, count_less_than__lx
-	lw $t5, 0($s3)
+	lw $s5, 0($s3)
 
 	addi $s3, $s3, WORD_SIZE
 
