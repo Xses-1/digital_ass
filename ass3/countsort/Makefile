@@ -3,8 +3,8 @@ compile:
 	mipsel-linux-musl-gcc countsort.o -EL -o countsort.out -static
 
 compile-gnu:
-	mipsel-linux-gnu-as countsort.s -EL -o countsort.o
-	mipsel-linux-gnu-gcc countsort.o -EL -o countsort.out -static
+	mipsel-linux-gnu-as countsort.s -o countsort.o
+	mipsel-linux-gnu-gcc countsort.o -o countsort.out -static
 
 compile-be:
 	mips-linux-musl-as countsort.s -o countsort.o
@@ -12,6 +12,9 @@ compile-be:
 
 run: compile-be
 	qemu-mips ./countsort.out
+
+run-gnu: compile-gnu
+	qemu-mips-static ./countsort.out
 
 scp:
 	dd if=countsort.out | ssh tomato 'mkdir -p /tmp/home/root/grass ; cd /tmp/home/root/grass; dd of=countsort.out; chmod +x countsort.out; ./countsort.out'

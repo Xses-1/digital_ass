@@ -49,23 +49,6 @@ main:
 	jal puts
 	jal scan_int
 	
-
-
-
-
-
-	# Debugging so that it's obvious what is wrong, and this is the line so it's obvious that this is debugging
-	move $a0, $v0
-	jal debug_int 
-
-
-
-
-
-
-
-
-
 	# Quadruple the number to
 	# get the size in bytes
 	add $v0, $v0, $v0
@@ -73,6 +56,10 @@ main:
 	# Save size in bytes
 	# to persistent register $s3
 	addi $s3, $v0, 0
+
+	move $a0, $s3
+	jal debug_int 
+
 
 	# Allocate space for array
 	addi $a0, $s3, 0
