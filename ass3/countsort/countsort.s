@@ -57,23 +57,19 @@ main:
 	# to persistent register $s3
 	addi $s3, $v0, 0
 
-	move $a0, $s3
-	jal debug_int 
-
-
 	# Allocate space for array
 	addi $a0, $s3, 0
 	jal malloc
 	# If malloc return a null pointer, exit program
 	beq $v0, $zero, malloc_fail
 
+	# Save address of array
+	# to persistent register $s4
+	move $s4, $v0
+
 	# Print message
 	la $a0, insert_string
 	jal puts
-
-	# Save address of array
-	# to persistent register $s4
-	addi $s4, $v0, 0
 
 	# Read in array elements
 	# let s1 be the upper bound of the loop
@@ -91,16 +87,16 @@ l_read:
 lx_read:
 
 	# test count_less_than
-	move $a0, $s0 # a0 = array
-	move $a1, $s3 # a0 = array len
-	addi $a2, $0, 1  # a0 = index of element i
+	move $a0, $s4 # a0 = array
+	move $a1, $s3 # a1 = array len
+	addi $a2, $0, 1  # a2 = index of element i
 
 	jal count_less_than
 
 	move $a0, $v0
 	jal debug_int
 
-	exit 5
+	exit 69
 	
 
 	# Print array
@@ -197,14 +193,11 @@ count_less_than:
 	# $v0 = number of elements less than this element
 
 	# Reset that bitch 
-	addi $v0, $0, 0
+	move $v0, $0
 
-
-
-	sll $a1, $a1, 2
+	# Convert index to mem offset
 	sll $a2, $a2, 2
-
-	# Convert $a2 to address by adding it to base addr of array
+	# Convert mem offset to absolute addr
 	add $a2, $a2, $a0
 
 	# according to calling convention,   
