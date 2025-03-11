@@ -86,15 +86,23 @@ l_read:
 	j l_read
 lx_read:
 
+	# ----------- Testing of the count less than -------------
 	# test count_less_than
+	# move $a0, $s4 # a0 = array
+	# move $a1, $s3 # a1 = array len
+	# addi $a2, $0, 1  # a2 = index of element i
+
+	# jal count_less_than
+
+	# move $a0, $v0
+	# jal debug_int
+	# --------------------------------------------------------
+
+
 	move $a0, $s4 # a0 = array
 	move $a1, $s3 # a1 = array len
-	addi $a2, $0, 1  # a2 = index of element i
+	jal sort_by_counting
 
-	jal count_less_than
-
-	move $a0, $v0
-	jal debug_int
 
 	exit 69
 	
@@ -214,10 +222,7 @@ count_less_than:
 	move $s0, $a0
 	add $s1, $a0, $a1 # end of array = array base + length
 
-	# Convert index to mem offset
-	sll $a2, $a2, 2
-	# Convert mem offset to absolute addr
-	add $s2, $a2, $a0
+	move $s2, $a2
 
 	move $s3, $a0 # start looking at element 0
 	lw $s4, 0($s2) # address of the element we interested in --pedantic 
@@ -278,8 +283,96 @@ count_less_than__lx:
 	stackload $s5, 5
 	stackload $s6, 7
 	stackload $s7, 8
-	stfree 1
+	stfree 9
 	jr $ra
+
+
+
+
+sort_by_counting:
+	
+	# $a0 = array basement adress
+	# $a1 = array length in Bytes
+
+
+	stalloc 9
+	stackstore $ra, 0
+	stackstore $s0, 1
+	stackstore $s1, 2
+	stackstore $s2, 3
+	stackstore $s3, 4
+	stackstore $s4, 5
+	stackstore $s5, 6
+	stackstore $s6, 7
+	stackstore $s7, 8
+
+
+
+	
+	# $s0 array base addr
+	# $s1 array end addr (non-inclusive)
+	# $s2 generic incrementer -- i
+	# $s3 variable for counting the elements that are 
+	#			less than the target -- lessThan
+	# $s4 address of the new array -- *b
+
+
+	# Initializtion of the local variables
+	move $s0, $a0
+	add $s1, $a0, $a1 # end of array = array base + length
+	move $s2, $a0
+
+
+	# Allocate the b array
+	addi $a0, $a1, 0
+	jal malloc
+	# If malloc return a null pointer, exit program
+	beq $v0, $zero, malloc_fail
+	move $s4, $v0
+
+
+sort_by_counting__l1:
+	
+	# if i == lenght, then go out
+	beq $s1, $s2, sort_by_counting__l1x
+	# i++
+	addi $s2, $s2, WORD_SIZE
+
+
+	# lessThan = countLessThan(a, lenght, i);
+	move $a0, $s0 # a0 = array
+	move $a1, $s1 # a1 = array len
+	move $a2, $s2
+	jal count_less_than
+	sll $s3, $v0, 2
+
+	# b[lessThan] = a[i]
+	add $s3, $s3, $s4
+	
+	# $t0 a[i]
+	lw $t0, 0($s2)
+
+	# b[lessThan] = a[i]
+	sw $t0, 0($s3) 
+
+	j sort_by_counting__l1
+
+
+sort_by_counting__l1x:
+
+
+	stackload $ra, 0
+	stackload $s0, 1
+	stackload $s1, 2
+	stackload $s2, 3
+	stackload $s3, 4
+	stackload $s4, 5
+	stackload $s5, 5
+	stackload $s6, 7
+	stackload $s7, 8
+	stfree 9
+	jr $ra
+
 
 
 
