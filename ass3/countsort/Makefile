@@ -6,7 +6,11 @@ compile-gnu:
 	mipsel-linux-gnu-as countsort.s -EL -o countsort.o
 	mipsel-linux-gnu-gcc countsort.o -EL -o countsort.out -static
 
-run: compile
+compile-be:
+	mips-linux-musl-as countsort.s -o countsort.o
+	mips-linux-musl-gcc countsort.o -o countsort.out -static
+
+run: compile-be
 	qemu-mips ./countsort.out
 
 scp:
