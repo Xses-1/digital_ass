@@ -153,6 +153,27 @@ and success! it works!
 has our final commands for building the esecutable
 and copying it to the router and running it.
 
+### Connecting to router
+
+If you have both a wireless card and wired card in your laptop
+it is easy to connect to the router while still having internet.
+You just have to change the metrics of the routes
+so that the wifi connection (internet)
+gets priority over the wired connection (router)
+(usually, the opposite is the default).
+You can use the `ip` command for this.
+Tab-complete really helps here also.
+
+```
+sudo ip route replace default via {IP} dev {DEVICE} metric {METRIC}
+
+# Lower metric=higher prio. Set wifi to have small metric
+sudo ip route replace default via 145.94.128.1 dev wlan0 metric 1
+
+# Set wired to have high metric
+sudo ip route replace default via 192.168.1.1 dev eth0 metric 600
+```
+
 
 ## License
 

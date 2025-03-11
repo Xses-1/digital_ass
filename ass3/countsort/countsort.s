@@ -75,9 +75,8 @@ main:
 	# let s1 be the upper bound of the loop
 	# and s0 the variable of iteration
 	# Remeber, s3 is size of array in bytes.
-	addi $s0, $s4, 0
-	addi $s1, $s3, 0
-	add $s1, $s1, $s0
+	move $s0, $s4
+	add $s1, $s4, $s3
 
 l_read:	
 	beq $s0, $s1, lx_read
@@ -87,15 +86,15 @@ l_read:
 	j l_read
 lx_read:
 
-
-
 	# test count_less_than
-	addi $a0, $s0, 0  # a0 = array
-	addi $a1, $s3, 0  # a0 = array len
+	move $a0, $s0 # a0 = array
+	move $a1, $s3 # a0 = array len
 	addi $a2, $0, 1  # a0 = index of element i
 
-	addi $a0, $v0, 0
-	jal puts
+	jal count_less_than
+
+	move $a0, $v0
+	jal debug_int
 
 	exit 5
 	
@@ -223,12 +222,22 @@ count_less_than__l:
 
 	addi $t0, $t0, WORD_SIZE
 
+	# Demorgan bullshit ahead
+
+	# The expression we need is
+	# a[j] < a[i] || (a[j] == a[i] && i < j)
+	#
+	# or
+	# t2 < t3 || (t2 == t3 && a2 < t0)
+	#
+	# t4 || (t5 && t6)
+	#
+	# Getting demorganned:
+	# t4 || !(!t5 || !t6)
 	
 	# t4: is a[j] < a[i]
 	slt $t4, $t2, $t3
 	bne $t4, $0, count_less_than__incr
-
-	# Demorgan bullshit ahead
 
 	# t5: t5 is 0 if a[j] == a[i]
 	sub $t5, $t2, $t3
@@ -240,8 +249,7 @@ count_less_than__l:
 	# t7 = 0 if a[j] == a[i] && i < j
 	or $t7, $t4, $t6
 
-	bne $t7, $0, count_les_than__l
-
+	bne $t7, $0, count_less_than__l
 
 count_less_than__incr:
 
