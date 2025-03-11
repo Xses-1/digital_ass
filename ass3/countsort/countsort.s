@@ -48,6 +48,23 @@ main:
 	la $a0, hello_string
 	jal puts
 	jal scan_int
+	
+
+
+
+
+
+	# Debugging so that it's obvious what is wrong, and this is the line so it's obvious that this is debugging
+	move $a0, $v0
+	jal debug_int 
+
+
+
+
+
+
+
+
 
 	# Quadruple the number to
 	# get the size in bytes
