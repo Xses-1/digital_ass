@@ -188,17 +188,40 @@ selsrt_lx:
 
 count_less_than:
 	# $a0 = array
-	# $a1 = length of array - len
+	# $a1 = length of array IN BYTES
 	# $a2 = index of element we're interested in - i 
 	# $v0 = number of elements less than this element
 
-	# Reset that bitch 
-	move $v0, $0
+	stalloc 1
+	stackstore $ra, 0
+	stackstore $s0, 1
+	stackstore $s1, 2
+	stackstore $s2, 3
+	stackstore $s3, 4
+	stackstore $s4, 5
+	stackstore $s5, 6
+	stackstore $s6, 7
+	stackstore $s7, 8
+
+	# $s0 array base addr
+	# $s1 array end addr (non-inclusive)
+	# $s2 addr of element were interested in -- i
+	# $s3 addr of current element were looking at -- j
+	# $s4 value of element we're interested in -- a[i]
+	# $s5 value of element we're looking at -- a[j]
+	# $s7 counter for number of elements less than
+
+	move $s0, $a0
+	add $s1, $a0, $a1 # end of array = array base + length
 
 	# Convert index to mem offset
 	sll $a2, $a2, 2
 	# Convert mem offset to absolute addr
-	add $a2, $a2, $a0
+	add $s2, $a2, $a0
+
+	move $s3, $a0 # start looking at element 0
+	move $s7, $0 # start counting numbers less than at 0
+
 
 	# according to calling convention,   
 	# The t registers can be used
@@ -208,16 +231,13 @@ count_less_than:
 	# let $t2 be the current inspected value - a[j]
 
 	# let $t3 be the element of interestingness - a[i]
-	lw $t3, 0($a2)
+	#lw $t3, 0($a2)
 
-	# Start llop
-	addi $t0, $a0, 0
-	add $t1, $a0, $a1
 count_less_than__l:
-	beq $t0, $t1, count_less_than__lx
-	lw $t2, 0($t0)
+	beq $s1, $s3, count_less_than__lx
+	lw $t5, 0($s3)
 
-	addi $t0, $t0, WORD_SIZE
+	addi $s3, $s3, WORD_SIZE
 
 	# Demorgan bullshit ahead
 
@@ -225,16 +245,16 @@ count_less_than__l:
 	# a[j] < a[i] || (a[j] == a[i] && i < j)
 	#
 	# or
-	# t2 < t3 || (t2 == t3 && a2 < t0)
+	# s5 < s4 || (s5 == s4 && s2 < s3)
 	#
-	# t4 || (t5 && t6)
+	# t0 || (t1 && t2)
 	#
 	# Getting demorganned:
-	# t4 || !(!t5 || !t6)
+	# t0 || !(!t1 || !t2)
 	
 	# t4: is a[j] < a[i]
-	slt $t4, $t2, $t3
-	bne $t4, $0, count_less_than__incr
+	slt $t0, $s5, $s4
+	bne $t0, $0, count_less_than__incr
 
 	# t5: t5 is 0 if a[j] == a[i]
 	sub $t5, $t2, $t3
@@ -256,6 +276,16 @@ count_less_than__incr:
 
 count_less_than__lx:
 
+	stackload $ra, 0
+	stackload $s0, 1
+	stackload $s1, 2
+	stackload $s2, 3
+	stackload $s3, 4
+	stackload $s4, 5
+	stackload $s5, 5
+	stackload $s6, 7
+	stackload $s7, 8
+	stfree 1
 	jr $ra
 
 
@@ -376,7 +406,6 @@ print_int:
 	stfree 1
 	jr $ra
 
-	stfree 1
 debug_int:
 	stalloc 1
 	stackstore $ra, 0
@@ -388,8 +417,6 @@ debug_int:
 	stackload $ra, 0
 	stfree 1
 	jr $ra
-
-	stfree 1
 
 
 .section .data
