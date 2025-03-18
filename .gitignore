@@ -6,6 +6,7 @@ student_numbers
 *busybox*
 *.tar*
 *.tgz
+*.bin
 *.zip
 arm/lpc1343_checksum
 
