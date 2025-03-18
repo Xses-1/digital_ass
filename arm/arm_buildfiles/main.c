@@ -2,15 +2,22 @@
 #include "delay.c"
 #include "LPC13xx.h"
 
-#define GPIO3DIR LPC_GPIO3->DIR
-#define GPIO3DATA LPC_GPIO3->DATA
+//#define XSTR(x) STR(x)
+//#define STR(x) #x
+//#pragma message "The value of ABC: " XSTR(LPC_GPIO3)
+
+//#define GPIO3DIR LPC_GPIO3->DIR
+//#define GPIO3DATA LPC_GPIO3->DATA
+
+#define GPIO3DIR 0x50038000
+#define GPIO3DATA 0x50033FFC
 
 #define SETBIT(addr, bit) \
 	*(volatile uint32_t *) addr |= 1 << bit;
 #define UNSETBIT(addr, bit) \
 	*(volatile uint32_t *) addr &= ~(1 << bit);
 
-static void wtfinit (void) {
+static void init (void) {
 	SETBIT(GPIO3DIR, 0);
 }
 
@@ -23,11 +30,11 @@ static void led_on(void) {
 }
 
 int main() {
-	wtfinit();
-	init_delay();
-	for (;;) {
+	init();
+	//init_delay();
+	while (1) {
 		led_on();
-		delay_ms(500);
+		delay_ms(50);
 		led_off();
 		delay_ms(500);
 	}
