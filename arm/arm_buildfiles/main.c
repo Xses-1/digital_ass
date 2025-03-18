@@ -1,4 +1,5 @@
 #include "delay.h"
+#include "delay.c"
 #include "LPC13xx.h"
 
 #define GPIO3DIR LPC_GPIO3->DIR
@@ -9,7 +10,7 @@
 #define UNSETBIT(addr, bit) \
 	*(volatile uint32_t *) addr &= ~(1 << bit);
 
-static void init (void) {
+static void wtfinit (void) {
 	SETBIT(GPIO3DIR, 0);
 }
 
@@ -22,11 +23,11 @@ static void led_on(void) {
 }
 
 int main() {
-	init();
+	wtfinit();
 	init_delay();
 	for (;;) {
 		led_on();
-		delay_ms(50);
+		delay_ms(500);
 		led_off();
 		delay_ms(500);
 	}
