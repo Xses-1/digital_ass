@@ -2,7 +2,10 @@
 *.out
 student_numbers
 *.o
+*.d
 *busybox*
 *.tar*
 *.tgz
 *.zip
+arm/lpc1343_checksum
+
