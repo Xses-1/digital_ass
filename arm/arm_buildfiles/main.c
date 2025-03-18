@@ -12,15 +12,21 @@
 #define GPIO3DIR 0x50038000
 #define GPIO3DATA 0x50033FFC
 
+#define GPIO2DIR 0x50028000
+#define GPIO2DATA 0x50023FFC
+
 #define SETBIT(addr, bit) \
 	*(volatile uint32_t *) addr |= 1 << bit;
 #define UNSETBIT(addr, bit) \
 	*(volatile uint32_t *) addr &= ~(1 << bit);
 #define FLIPBIT(addr, bit) \
 	*(volatile uint32_t *) addr ^= (1 << bit);
+#define READBIT(addr, bit) \
+	(((*(volatile uint32_t *) addr) & (1 << bit)) != 0)
 
 static void init (void) {
 	SETBIT(GPIO3DIR, 0);
+	UNSETBIT(GPIO2DIR, 9);
 }
 
 static void led_off(void) {
@@ -36,13 +42,16 @@ static void led_flip(void) {
 }
 
 int main() {
+	int prev_state;
+	prev_state = READBIT(GPIO2DATA, 9);
+
 	init();
 	//init_delay();
 	while (1) {
-		led_flip();
+		if (READBIT(GPIO2DATA, 9)) {
+			led_flip();
+		}
 		delay_ms(50);
-		led_flip();
-		delay_ms(500);
 	}
 }
 
