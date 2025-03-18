@@ -1,6 +1,37 @@
+#include "delay.h"
 #include "LPC13xx.h"
 
-int main (void)
-{
-	while (1) { }
+#define GPIO3DIR LPC_GPIO3->DIR
+#define GPIO3DATA LPC_GPIO3->DATA
+
+#define SETBIT(addr, bit) \
+	*(volatile uint32_t *) addr |= 1 << bit;
+#define UNSETBIT(addr, bit) \
+	*(volatile uint32_t *) addr &= ~(1 << bit);
+
+static void init (void) {
+	SETBIT(GPIO3DIR, 0);
 }
+
+static void led_off(void) {
+	SETBIT(GPIO3DATA, 0);
+}
+
+static void led_on(void) {
+	UNSETBIT(GPIO3DATA, 0);
+}
+
+int main() {
+	init();
+	init_delay();
+	for (;;) {
+		led_on();
+		delay_ms(50);
+		led_off();
+		delay_ms(500);
+	}
+}
+
+void _start() {
+}
+
