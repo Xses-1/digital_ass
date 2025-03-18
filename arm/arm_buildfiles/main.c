@@ -42,15 +42,17 @@ static void led_flip(void) {
 }
 
 int main() {
-	int prev_state;
+	int prev_state, current_state;
 	prev_state = READBIT(GPIO2DATA, 9);
 
 	init();
 	//init_delay();
 	while (1) {
-		if (READBIT(GPIO2DATA, 9)) {
+		current_state = READBIT(GPIO2DATA, 9);
+		if (current_state != prev_state && !current_state) {
 			led_flip();
 		}
+		prev_state = current_state;
 		delay_ms(50);
 	}
 }
