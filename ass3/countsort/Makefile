@@ -14,7 +14,7 @@ run: compile-be
 	qemu-mips ./countsort.out
 
 run-gnu: compile-gnu
-	qemu-mips-static ./countsort.out
+	qemu-mipsel-static ./countsort.out
 
 scp:
 	dd if=countsort.out | ssh tomato 'mkdir -p /tmp/home/root/grass ; cd /tmp/home/root/grass; dd of=countsort.out; chmod +x countsort.out; ./countsort.out'
