@@ -16,6 +16,8 @@
 	*(volatile uint32_t *) addr |= 1 << bit;
 #define UNSETBIT(addr, bit) \
 	*(volatile uint32_t *) addr &= ~(1 << bit);
+#define FLIPBIT(addr, bit) \
+	*(volatile uint32_t *) addr ^= (1 << bit);
 
 static void init (void) {
 	SETBIT(GPIO3DIR, 0);
@@ -29,13 +31,17 @@ static void led_on(void) {
 	UNSETBIT(GPIO3DATA, 0);
 }
 
+static void led_flip(void) {
+	FLIPBIT(GPIO3DATA, 0);
+}
+
 int main() {
 	init();
 	//init_delay();
 	while (1) {
-		led_on();
+		led_flip();
 		delay_ms(50);
-		led_off();
+		led_flip();
 		delay_ms(500);
 	}
 }

@@ -1,0 +1,1 @@
+../arm_buildfiles/lpc1343.ld
