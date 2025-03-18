@@ -4,3 +4,4 @@ student_numbers
 *.o
 *busybox*
 *.tar*
+*.tgz
