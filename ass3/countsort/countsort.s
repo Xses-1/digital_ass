@@ -39,6 +39,11 @@
 	syscall
 .endm
 
+.macro foobar
+	la $a0, foobar_string
+	jal puts
+.endm
+
 .section .text
 
 .global main
@@ -87,14 +92,14 @@ l_read:
 lx_read:
 
 	# ----------- Testing of the count less than -------------
-	move $a0, $s4 # a0 = array
-	move $a1, $s3 # a1 = array len
-	addi $a2, $s4, WORD_SIZE  # a2 = index of element i
+	#move $a0, $s4 # a0 = array
+	#move $a1, $s3 # a1 = array len
+	#addi $a2, $s4, WORD_SIZE  # a2 = index of element i
 
-	jal count_less_than
+	#jal count_less_than
 
-	move $a0, $v0
-	jal debug_int
+	#move $a0, $v0
+	#jal debug_int
 	# --------------------------------------------------------
 
 	move $a0, $s4 # a0 = array
@@ -313,10 +318,12 @@ sort_by_counting:
 	# $s3 variable for counting the elements that are 
 	#			less than the target -- lessThan
 	# $s4 address of the new array -- *b
+	# $s5 array length bytes
 
 
 	# Initializtion of the local variables
 	move $s0, $a0
+	move $s5, $a1
 	add $s1, $a0, $a1 # end of array = array base + length
 	move $s2, $a0
 	
@@ -328,7 +335,6 @@ sort_by_counting:
 	beq $v0, $zero, malloc_fail
 	move $s4, $v0
 
-
 sort_by_counting__l1:
 	
 	# if i == lenght, then go out
@@ -337,12 +343,11 @@ sort_by_counting__l1:
 
 	# lessThan = countLessThan(a, lenght, i);
 	move $a0, $s0 # a0 = array
-	move $a1, $s1 # a1 = array len
+	move $a1, $s5 # a1 = array len
 	move $a2, $s2
 
-
-
 	jal count_less_than
+
 
 	sll $s3, $v0, 2
 
@@ -358,6 +363,8 @@ sort_by_counting__l1:
 
 	# i++
 	addi $s2, $s2, WORD_SIZE
+
+	foobar
 
 	j sort_by_counting__l1
 
@@ -533,6 +540,6 @@ debug_int:
 	scanf_fmt_int: .asciz "%i"
 	# printf format code to read an int
 	printf_fmt_int: .asciz "%i\n"
-
+	foobar_string: .asciz "foobar"
 	debug_fmt_int: .asciz "foo %i\n"
 
