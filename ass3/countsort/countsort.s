@@ -87,16 +87,17 @@ l_read:
 lx_read:
 
 	# ----------- Testing of the count less than -------------
-	# test count_less_than
-	# move $a0, $s4 # a0 = array
-	# move $a1, $s3 # a1 = array len
-	# addi $a2, $0, 1  # a2 = index of element i
+	move $a0, $s4 # a0 = array
+	move $a1, $s3 # a1 = array len
+	addi $a2, $s4, WORD_SIZE  # a2 = index of element i
 
-	# jal count_less_than
+	jal count_less_than
 
-	# move $a0, $v0
-	# jal debug_int
+	move $a0, $v0
+	jal debug_int
 	# --------------------------------------------------------
+
+	exit 9
 
 	move $a0, $s4 # a0 = array
 	move $a1, $s3 # a1 = array len
@@ -220,9 +221,9 @@ count_less_than:
 	move $s2, $a2
 
 	move $s3, $a0 # start looking at element 0
-	lw $s4, 0($s2) # address of the element we interested in --pedantic 
-	move $s7, $0 # start counting numbers less than at 0
+	lw $s4, 0($s2)
 
+	move $s7, $0 # start counting numbers less than at 0
 
 count_less_than__l:
 
@@ -258,9 +259,6 @@ count_less_than__l:
 
 	# t7 = 0 if a[j] == a[i] && i < j
 	or $t3, $t1, $t2
-
-	la $a0, debug_fmt_int
-	jal puts
 
 	bne $t3, $0, count_less_than__l
 

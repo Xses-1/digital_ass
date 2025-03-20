@@ -53,7 +53,7 @@ int main() {
 			led_flip();
 		}
 		prev_state = current_state;
-		delay_ms(50);
+		delay_ms(25);
 	}
 }
 
