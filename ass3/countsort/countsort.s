@@ -106,6 +106,8 @@ lx_read:
 	move $a1, $s3 # a1 = array len
 	jal sort_by_counting
 
+fuckit:
+
 	# Print array
 	# let s1 be the upper bound of the loop
 	# and s0 the variable of iteration
@@ -283,7 +285,7 @@ count_less_than__lx:
 	stackload $s2, 3
 	stackload $s3, 4
 	stackload $s4, 5
-	stackload $s5, 5
+	stackload $s5, 6
 	stackload $s6, 7
 	stackload $s7, 8
 	stfree 9
@@ -308,9 +310,6 @@ sort_by_counting:
 	stackstore $s5, 6
 	stackstore $s6, 7
 	stackstore $s7, 8
-
-
-
 	
 	# $s0 array base addr
 	# $s1 array end addr (non-inclusive)
@@ -327,19 +326,18 @@ sort_by_counting:
 	add $s1, $a0, $a1 # end of array = array base + length
 	move $s2, $a0
 	
-
 	# Allocate the b array
-	addi $a0, $a1, 0
+	addi $a0, $s5, 0
 	jal malloc
 	# If malloc return a null pointer, exit program
 	beq $v0, $zero, malloc_fail
 	move $s4, $v0
 
+
 sort_by_counting__l1:
 	
 	# if i == lenght, then go out
 	beq $s1, $s2, sort_by_counting__l1x
-
 
 	# lessThan = countLessThan(a, lenght, i);
 	move $a0, $s0 # a0 = array
@@ -364,7 +362,6 @@ sort_by_counting__l1:
 	# i++
 	addi $s2, $s2, WORD_SIZE
 
-	foobar
 
 	j sort_by_counting__l1
 
@@ -395,11 +392,12 @@ sort_by_counting__l2x:
 	stackload $s2, 3
 	stackload $s3, 4
 	stackload $s4, 5
-	stackload $s5, 5
+	stackload $s5, 6
 	stackload $s6, 7
 	stackload $s7, 8
 	stfree 9
-	jr $ra
+	#jr $ra
+	j fuckit
 
 
 
