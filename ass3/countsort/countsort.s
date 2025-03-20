@@ -97,8 +97,6 @@ lx_read:
 	jal debug_int
 	# --------------------------------------------------------
 
-	exit 9
-
 	move $a0, $s4 # a0 = array
 	move $a1, $s3 # a1 = array len
 	jal sort_by_counting
