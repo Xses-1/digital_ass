@@ -6,11 +6,11 @@
 //#define STR(x) #x
 //#pragma message "The value of ABC: " XSTR(LPC_GPIO3)
 
-//#define GPIO3DIR LPC_GPIO3->DIR
-//#define GPIO3DATA LPC_GPIO3->DATA
+#define GPIO3DIR LPC_GPIO3_DIR
+#define GPIO3DATA LPC_GPIO3_DATA
 
-#define GPIO3DIR 0x50038000
-#define GPIO3DATA 0x50033FFC
+//#define GPIO3DIR 0x50038000
+//#define GPIO3DATA 0x50033FFC
 
 #define SETBIT(addr, bit) \
 	*(volatile uint32_t *) addr |= 1 << bit;

@@ -1,1 +1,2 @@
-../arm_buildfiles/LPC13xx.h
+#define LPC_GPIO3_DIR 0x50038000
+#define GLPC_GPIO3_DATA 0x50033FFC
