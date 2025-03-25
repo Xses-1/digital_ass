@@ -39,19 +39,21 @@ static void init (void) {
 	SETWORD(TMR32B0MR3, 100); // Set match register
 }
 
+static void pin_low(void) {
+	SETBIT(GPIO3DATA, 0);
+}
+
+static void pin_high(void) {
+	UNSETBIT(GPIO3DATA, 0);
+}
+
 int main() {
 	int prev_state, current_state;
 	prev_state = READBIT(GPIO2DATA, 9);
 
 	init();
-	//init_delay();
+	pin_low();
 	while (1) {
-		current_state = READBIT(GPIO2DATA, 9);
-		if (current_state != prev_state && !current_state) {
-			led_flip();
-		}
-		prev_state = current_state;
-		delay_ms(25);
 	}
 }
 
