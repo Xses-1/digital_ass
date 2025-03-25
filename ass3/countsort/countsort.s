@@ -260,7 +260,9 @@ count_less_than__l:
 
 	# t2: is 0 if i < j
 	slt $t2, $s2, $s3
-	xor $t2, $t2, 0b10000000000000000000000000000000
+
+	# idk why but removing this line fixes everything!?!?
+	#xor $t2, $t2, 0b10000000000000000000000000000000
 
 	# t7 = 0 if a[j] == a[i] && i < j
 	or $t3, $t1, $t2
