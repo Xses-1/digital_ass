@@ -1,6 +1,7 @@
 #include "delay.h"
 #include "delay.c"
 #include "LPC13xx.h"
+#include "fuckit.h"
 
 //#define XSTR(x) STR(x)
 //#define STR(x) #x
