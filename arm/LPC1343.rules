@@ -1,0 +1,2 @@
+# Make sure regular users can read/write the device and prevent automounting
+ATTRS{idVendor}=="04cc",ATTRS{idProduct}=="0003",GROUP="users",MODE="0666",ENV{UDISKS_AUTO}="0",ENV{UDISKS_IGNORE}="1"
