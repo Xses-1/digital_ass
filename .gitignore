@@ -10,3 +10,4 @@ student_numbers
 *.zip
 arm/lpc1343_checksum
 
+arm/toolchain
