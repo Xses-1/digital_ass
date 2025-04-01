@@ -33,6 +33,10 @@ begin
 						aluinstr <= "00111";
 					when "000000" =>		-- sll
 						aluinstr <= "01000";
+					when "000100" =>		-- sllv
+						aluinstr <= "10000";	-- (This is
+									-- is the added one!)
+
 					when "000010" =>		-- srl
 						aluinstr <= "01001";
 					when "100010" =>		-- sub

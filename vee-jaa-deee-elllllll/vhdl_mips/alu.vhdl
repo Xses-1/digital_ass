@@ -43,6 +43,11 @@ begin
 			when "01000" =>		-- sll
 				result <= std_logic_vector (shift_left (unsigned (data2), to_integer (unsigned (shamt))));
 				branch <= '0';
+		
+			when "10000" =>			-- sllv (This is the added one!)
+				result <= std_logic_vector (shift_left (unsigned (data2), unsigned (data1)));
+				branch <= '0';
+
 			when "01001" =>		-- srl
 				result <= std_logic_vector (shift_right (unsigned (data2), to_integer (unsigned (shamt))));
 				branch <= '0';

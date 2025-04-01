@@ -74,6 +74,13 @@ component jump
 	);
 end component;
 
+component jump_and_link_right
+	port
+	(
+		
+	)
+end component;
+
 component memory
 	port
 	(
