@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resource xmlns="http://www.wxwidgets.org/wxxrc" version="2.5.3.0">
+	<object class="wxPanel" name="projectOptions">
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="checkboxUSB">
+					<label>Use USB ROM support</label>
+					<tooltip>Use the built-in USB support from the ROM. This requires 384 bytes of memory. This option will reserve these bytes.</tooltip>
+				</object>
+				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="checkboxMap">
+					<label>Create symbol map file (.map)</label>
+					<checked>1</checked>
+					<tooltip>Create an extended symbol file from the .elf output file</tooltip>
+				</object>
+				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="checkboxHex">
+					<label>Create hex file (.hex)</label>
+					<tooltip>Create an Intel hex file from the .elf output file. This can be used with a JTAG programmer.</tooltip>
+				</object>
+				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="checkboxBin">
+					<label>Create Binary file (.bin)</label>
+					<checked>1</checked>
+					<tooltip>Create a binary image file from the .elf output file. This required for use with the USB programming option.</tooltip>
+				</object>
+				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxStaticLine" name="ID_STATICLINE1" />
+				<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+				<option>1</option>
+			</object>
+			<object class="sizeritem">
+				<object class="wxCheckBox" name="checkboxSize">
+					<label>Run size after build</label>
+					<tooltip>Run size after a build to display how much resource is being used in the microcontroller.</tooltip>
+				</object>
+				<flag>wxALL|wxALIGN_LEFT|wxALIGN_CENTER_VERTICAL</flag>
+				<border>5</border>
+				<option>1</option>
+			</object>
+		</object>
+	</object>
+</resource>

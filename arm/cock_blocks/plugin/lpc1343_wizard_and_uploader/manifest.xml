@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_plugin_manifest_file>
+    <SdkVersion major="1" minor="19"  release="0" />
+    <Plugin name="lpc1343_uploader">
+        <Value title="LPC1343 Uploader and Wizard Installer" />
+        <Value version="0.3" />
+        <Value description="LPC1343 Uploader and Wizard Installer" />
+        <Value author="X. van Rijnsoever" />
+        <Value authorEmail="X.vanRijnsoever@TUDelft.nl" />
+        <Value authorWebsite="" />
+        <Value thanksTo="" />
+        <Value license="GPL" />
+    </Plugin>
+    <Extra file="templates/wizard/nxp_lpc1343/logo.png" />
+    <Extra file="templates/wizard/nxp_lpc1343/wizard.png" />
+    <Extra file="templates/wizard/nxp_lpc1343/wizard.script" />
+    <Extra file="templates/wizard/nxp_lpc1343/wizard.xrc" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/core_cm3.h" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/core_cmFunc.h" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/core_cmInstr.h" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/LPC1343.ld" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/LPC1343_usb.ld" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/LPC13xx.h" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/main.c" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/startup.c" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/system_LPC13xx.c" />
+    <Extra file="templates/wizard/nxp_lpc1343/files/system_LPC13xx.h" />
+</CodeBlocks_plugin_manifest_file>

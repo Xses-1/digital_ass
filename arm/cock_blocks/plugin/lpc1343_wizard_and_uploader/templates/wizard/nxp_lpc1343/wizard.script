@@ -1,0 +1,116 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+// Code::Blocks new project wizard script
+//
+// Project: NXP LPC1343 project (ARM Cortex M3)
+// Author:  Xavier van Rijnsoever
+//
+////////////////////////////////////////////////////////////////////////////////
+
+// Global Vars
+lpc1343USB  <- false;   // Use USB ROM features?
+lpc1343Map  <- false;   // Generate map file?
+lpc1343Hex  <- false;   // Generate hex file?
+lpc1343Bin  <- false;   // Generate bin file?
+lpc1343Size <- false;   // Run size after build?
+
+function BeginWizard()
+{
+    local wiz_type = Wizard.GetWizardType();
+
+    if (wiz_type == wizProject)
+    {
+        local intro_msg = _T("Welcome to the new NXP  LPC1343 project wizard!\n" +
+                             "This wizard will guide you to create a new NXP LPC1343 project.\n\n" +
+                             "When you 're ready to proceed, please click \"Next\"...");
+
+        Wizard.AddInfoPage(_T("NXPLPC1343Intro"), intro_msg);
+        Wizard.AddProjectPathPage();
+        Wizard.AddCompilerPage(_T("GNU ARM GCC Compiler"), _T("arm*"), false, false);
+        Wizard.AddPage(_T("projectOptions"));
+    }
+    else
+    {
+        Log(wiz_type);
+    }
+}
+
+function GetFilesDir()
+{
+    local result = _T("nxp_lpc1343/files");
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Project options page
+////////////////////////////////////////////////////////////////////////////////
+
+
+function OnLeave_projectOptions(fwd)
+{
+    if (fwd)
+    {
+        lpc1343USB  = Wizard.IsCheckboxChecked(_T("checkboxUSB"));
+        lpc1343Map  = Wizard.IsCheckboxChecked(_T("checkboxMap"));
+        lpc1343Hex  = Wizard.IsCheckboxChecked(_T("checkboxHex"));
+        lpc1343Bin  = Wizard.IsCheckboxChecked(_T("checkboxBin"));
+        lpc1343Size = Wizard.IsCheckboxChecked(_T("checkboxSize"));
+    }
+    return true;
+}
+
+function SetupProject(project)
+{
+    // Compiler options
+    local co_general            = _T("-mcpu=cortex-m3 -mthumb -std=gnu99 -I.");
+
+    // Linker options
+    local lo_general            = _T("-nostartfiles");
+    local lo_linkerscript       = _T("-T LPC1343.ld");
+    local lo_linkerscript_usb   = _T("-T LPC1343USB.ld");
+    local lo_map                = _T("-Wl,-Map=$(TARGET_OUTPUT_FILE).map");
+
+    // Post build steps
+    local pb_hex                = _T("arm-none-eabi-objcopy -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).hex");
+    local pb_bin_objcopy        = _T("arm-none-eabi-objcopy -O binary $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).bin");
+    local pb_bin_checksum       = _T("lpc1343_checksum $(TARGET_OUTPUT_FILE).bin");
+    local pb_size               = _T("arm-none-eabi-size $(TARGET_OUTPUT_FILE)");
+
+
+    // Setup compiler and linker options adn post build steps
+    WarningsOn(project, Wizard.GetCompilerID());
+    project.AddCompilerOption(co_general);
+    project.AddLinkerOption(lo_general);
+
+    if (lpc1343USB)
+        project.AddLinkerOption(lo_linkerscript_usb);
+    else
+        project.AddLinkerOption(lo_linkerscript);
+
+    if (lpc1343Map)
+        project.AddLinkerOption(lo_map);
+
+    if (lpc1343Hex)
+        project.AddCommandsAfterBuild(pb_hex);
+
+    if (lpc1343Bin)
+    {
+        project.AddCommandsAfterBuild(pb_bin_objcopy);
+        project.AddCommandsAfterBuild(pb_bin_checksum);
+    }
+
+    if (lpc1343Size)
+        project.AddCommandsAfterBuild(pb_size);
+
+
+    local target = project.GetBuildTarget(_T("default"));
+    if (!IsNull(target))
+    {
+        target.SetTargetType(ttConsoleOnly);
+        target.SetTargetFilenameGenerationPolicy(tgfpPlatformDefault, tgfpNone);
+        target.SetOutputFilename(Wizard.GetReleaseOutputDir() + Wizard.GetProjectName() + _T(".elf"));
+//      OptimizationsOn(target, Wizard.GetCompilerID());
+    }
+
+    return true;
+}
