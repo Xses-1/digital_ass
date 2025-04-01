@@ -1,3 +1,4 @@
+// Those are the ones we made
 #define LPC_GPIO3_DIR 0x50038000
 #define LPC_GPIO3_DATA 0x50033FFC
 #define LPC_GPIO1_DIR 0x50018000
@@ -15,6 +16,12 @@
 #define TMR32B0IR	0x40014000
 
 #define SYSAHBCLKCTRL	0x40048080
+
+
+// Those are the official ones
+
+//#define LPC_GPIO3_DIR  LPC_GPIO3->DIR
+//#define LPC_GPIO3_DATA LPC_GPIO3->DATA
 
 //#define TMR32B0TCR	LPC_TMR32B0->TCR
 //#define TMR32B0TC	LPC_TMR32B0->TC
